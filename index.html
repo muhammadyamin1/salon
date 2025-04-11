@@ -657,88 +657,140 @@
     </section><!-- /Team Section -->
 
     <!-- Contact Section -->
-<section id="contact" class="contact section">
+    <section id="contact" class="contact section">
 
-  <!-- Section Title -->
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Hubungi Kami</h2>
-    <p>Siap membantu Anda tampil lebih percaya diri!</p>
-  </div><!-- End Section Title -->
+      <!-- Section Title -->
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Hubungi Kami</h2>
+        <p>Siap membantu Anda tampil lebih percaya diri!</p>
+      </div><!-- End Section Title -->
 
-  <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-    <div class="row gy-4">
-      <div class="col-lg-6 ">
         <div class="row gy-4">
+          <div class="col-lg-6 ">
+            <div class="row gy-4">
 
-          <div class="col-lg-12">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="200">
-              <i class="bi bi-geo-alt"></i>
-              <h3>Alamat</h3>
-              <p>Jl. Medan Banda Aceh, Trieng Matang Ubi, Kec. Lhoksukon, Kabupaten Aceh Utara</p>
-            </div>
-          </div><!-- End Info Item -->
+              <div class="col-lg-12">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+                  data-aos-delay="200">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3>Alamat</h3>
+                  <p>Jl. Medan Banda Aceh, Trieng Matang Ubi, Kec. Lhoksukon, Kabupaten Aceh Utara</p>
+                </div>
+              </div><!-- End Info Item -->
 
-          <div class="col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="300">
-              <i class="bi bi-telephone"></i>
-              <h3>Telepon</h3>
-              <p>+62 821 6466 5610</p>
-            </div>
-          </div><!-- End Info Item -->
+              <div class="col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+                  data-aos-delay="300">
+                  <i class="bi bi-telephone"></i>
+                  <h3>Telepon</h3>
+                  <p>+62 821 6466 5610</p>
+                </div>
+              </div><!-- End Info Item -->
 
-          <div class="col-md-6">
-            <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
-              data-aos-delay="400">
-              <i class="bi bi-envelope"></i>
-              <h3>Email</h3>
-              <p>halosaloncantika@salonmu.com</p>
+              <div class="col-md-6">
+                <div class="info-item d-flex flex-column justify-content-center align-items-center" data-aos="fade-up"
+                  data-aos-delay="400">
+                  <i class="bi bi-envelope"></i>
+                  <h3>Email</h3>
+                  <p>halosaloncantika@salonmu.com</p>
+                </div>
+              </div><!-- End Info Item -->
+
             </div>
-          </div><!-- End Info Item -->
+          </div>
+
+          <div class="col-lg-6">
+            <form id="contact-form" action="https://formsubmit.co/freeweb908@gmail.com" method="POST"
+              class="php-email-form" data-aos="fade-up" data-aos-delay="500">
+
+              <!-- Anti-Spam -->
+              <input type="text" name="_honey" style="display:none">
+              <input type="hidden" name="_captcha" value="false">
+
+              <div class="row gy-4">
+
+                <div class="col-md-6">
+                  <input type="text" name="name" class="form-control" placeholder="Nama Anda" required>
+                </div>
+
+                <div class="col-md-6">
+                  <input type="email" name="email" class="form-control" placeholder="Email Anda" required>
+                </div>
+
+                <div class="col-md-12">
+                  <input type="text" name="subject" class="form-control" placeholder="Subjek Pesan" required>
+                </div>
+
+                <div class="col-md-12">
+                  <textarea name="message" class="form-control" rows="4" placeholder="Tulis pesan Anda di sini..."
+                    required></textarea>
+                </div>
+
+                <div class="col-md-12 text-center">
+                  <div class="loading" style="display:none;">Memuat...</div>
+                  <div class="error-message" style="display:none;"></div>
+                  <div class="sent-message" style="display:none;">Pesan Anda berhasil dikirim. Terima kasih!</div>
+                  <button type="submit">Kirim Pesan</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+
+          <script>
+            const form = document.getElementById('contact-form');
+            const loading = document.querySelector('.loading');
+            const errorMsg = document.querySelector('.error-message');
+            const sentMsg = document.querySelector('.sent-message');
+
+            form.addEventListener('submit', function (e) {
+              e.preventDefault();
+              loading.style.display = 'block';
+
+              fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+              }).then(response => {
+                loading.style.display = 'none';
+                if (response.ok) {
+                  sentMsg.style.display = 'block';
+                  form.reset();
+                } else {
+                  return response.json().then(data => {
+                    errorMsg.style.display = 'block';
+                    errorMsg.innerHTML = data.message || "Ada kesalahan. Silakan coba lagi.";
+                  });
+                }
+              }).catch(error => {
+                loading.style.display = 'none';
+                errorMsg.style.display = 'block';
+                errorMsg.innerHTML = "Gagal mengirim pesan. Periksa koneksi atau coba lagi.";
+              });
+            });
+          </script>
+          <!-- End Contact Form -->
+
+          <!-- Google Maps -->
+          <div class="col-12 mt-5" data-aos="fade-up">
+            <h3 class="text-center mb-4">Lokasi Salon Kami</h3>
+            <div style="border-radius: 20px; overflow: hidden; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.354367747954!2d97.3306783!3d5.0461679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x304789c5ed2f389f%3A0xee985d4e317e651!2sAldita%20Beauty%20Studio!5e0!3m2!1sen!2sid!4v1744339865625!5m2!1sen!2sid"
+                width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </div>
+          <!-- End Google Maps -->
 
         </div>
+
       </div>
 
-      <div class="col-lg-6">
-        <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up"
-          data-aos-delay="500">
-          <div class="row gy-4">
-
-            <div class="col-md-6">
-              <input type="text" name="name" class="form-control" placeholder="Nama Anda" required="">
-            </div>
-
-            <div class="col-md-6 ">
-              <input type="email" class="form-control" name="email" placeholder="Email Anda" required="">
-            </div>
-
-            <div class="col-md-12">
-              <input type="text" class="form-control" name="subject" placeholder="Subjek Pesan" required="">
-            </div>
-
-            <div class="col-md-12">
-              <textarea class="form-control" name="message" rows="4" placeholder="Tulis pesan Anda di sini..." required=""></textarea>
-            </div>
-
-            <div class="col-md-12 text-center">
-              <div class="loading">Memuat</div>
-              <div class="error-message"></div>
-              <div class="sent-message">Pesan Anda berhasil dikirim. Terima kasih!</div>
-
-              <button type="submit">Kirim Pesan</button>
-            </div>
-
-          </div>
-        </form>
-      </div><!-- End Contact Form -->
-
-    </div>
-
-  </div>
-
-</section><!-- /Contact Section -->
+    </section><!-- /Contact Section -->
 
   </main>
 
@@ -762,7 +814,7 @@
             <a href="#"><i class="bi bi-whatsapp"></i></a>
           </div>
         </div>
-  
+
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Link Penting</h4>
           <ul>
@@ -773,7 +825,7 @@
             <li><i class="bi bi-chevron-right"></i> <a href="#">Kebijakan Privasi</a></li>
           </ul>
         </div>
-  
+
         <div class="col-lg-2 col-md-3 footer-links">
           <h4>Layanan Kami</h4>
           <ul>
@@ -784,7 +836,7 @@
             <li><i class="bi bi-chevron-right"></i> <a href="#">Perawatan Wajah</a></li>
           </ul>
         </div>
-  
+
         <div class="col-lg-4 col-md-12 footer-newsletter">
           <h4>Berlangganan Newsletter</h4>
           <p>Dapatkan info promo dan layanan terbaru dari Salon Cantika langsung ke email Anda!</p>
@@ -797,19 +849,20 @@
             <div class="sent-message">Permintaan langganan Anda telah dikirim. Terima kasih!</div>
           </form>
         </div>
-  
+
       </div>
     </div>
-  
+
     <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> 2025 <strong class="px-1 sitename">Salon Cantika</strong> <span>Seluruh hak cipta dilindungi.</span></p>
+      <p>© <span>Copyright</span> 2025 <strong class="px-1 sitename">Salon Cantika</strong> <span>Seluruh hak cipta
+          dilindungi.</span></p>
       <div class="credits">
         <!-- Boleh diganti dengan kredit Anda jika sudah modifikasi sendiri -->
         <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> -->
       </div>
     </div>
-  
-  </footer>  
+
+  </footer>
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
@@ -830,6 +883,67 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+
+  <!-- WhatsApp Button -->
+  <div id="whatsapp-container" class="whatsapp-container">
+    <span id="wa-label" class="wa-label">Hubungi Kami</span>
+    <a href="https://wa.me/6282164665610" target="_blank" class="whatsapp-float">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+  </div>
+
+  <style>
+    .whatsapp-container {
+      position: fixed;
+      bottom: 20px;
+      /* Mulai dari bawah */
+      right: 12px;
+      text-align: center;
+      z-index: 999;
+      transition: all 0.4s ease;
+    }
+
+    .wa-label {
+      display: inline-block;
+      margin-bottom: 5px;
+      background: #25d366;
+      color: white;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 14px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      transition: all 0.4s ease;
+    }
+
+    .whatsapp-float {
+      background-color: #25d366;
+      color: white;
+      border-radius: 50%;
+      padding: 14px;
+      font-size: 24px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      display: inline-block;
+      transition: all 0.4s ease;
+    }
+  </style>
+  
+  <script>
+    window.addEventListener("scroll", function () {
+      const container = document.getElementById("whatsapp-container");
+      const label = document.getElementById("wa-label");
+
+      if (window.scrollY > 100) {
+        container.style.bottom = "70px"; // Setelah scroll, posisi lebih tinggi
+        label.style.opacity = "0"; // Menyembunyikan tulisan
+        label.style.transform = "translateY(10px)";
+      } else {
+        container.style.bottom = "20px"; // Posisi awal di bawah
+        label.style.opacity = "1"; // Tampilkan tulisan kembali
+        label.style.transform = "translateY(0)";
+      }
+    });
+  </script>
+  <!-- End WhatsApp Button -->
 
 </body>
 
