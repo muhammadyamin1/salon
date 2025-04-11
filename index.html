@@ -702,6 +702,13 @@
           </div>
 
           <div class="col-lg-6">
+            <!--
+              ==========================
+              GANTI EMAIL DENGAN MILIKMU
+              ==========================
+              Ganti freeweb908@gmail.com dengan emailmu sendiri
+              Saat pertama kali kirim form, kamu harus verifikasi lewat email
+            -->
             <form id="contact-form" action="https://formsubmit.co/freeweb908@gmail.com" method="POST"
               class="php-email-form" data-aos="fade-up" data-aos-delay="500">
 
@@ -748,6 +755,8 @@
             form.addEventListener('submit', function (e) {
               e.preventDefault();
               loading.style.display = 'block';
+              errorMsg.style.display = 'none';
+              sentMsg.style.display = 'none';
 
               fetch(form.action, {
                 method: 'POST',
@@ -755,13 +764,21 @@
                 headers: { 'Accept': 'application/json' }
               }).then(response => {
                 loading.style.display = 'none';
+
                 if (response.ok) {
                   sentMsg.style.display = 'block';
                   form.reset();
                 } else {
+                  // Kadang formsubmit.co tetap kasih JSON meski status bukan 200
                   return response.json().then(data => {
-                    errorMsg.style.display = 'block';
-                    errorMsg.innerHTML = data.message || "Ada kesalahan. Silakan coba lagi.";
+                    const msg = data.message || "Ada kesalahan. Silakan coba lagi.";
+                    if (msg.toLowerCase().includes("berhasil") || msg.toLowerCase().includes("success")) {
+                      sentMsg.innerText = msg;
+                      sentMsg.style.display = 'block';
+                    } else {
+                      errorMsg.innerText = msg;
+                      errorMsg.style.display = 'block';
+                    }
                   });
                 }
               }).catch(error => {
@@ -926,7 +943,7 @@
       transition: all 0.4s ease;
     }
   </style>
-  
+
   <script>
     window.addEventListener("scroll", function () {
       const container = document.getElementById("whatsapp-container");
